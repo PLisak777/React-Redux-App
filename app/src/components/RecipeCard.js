@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../actions/actions';
 
@@ -50,57 +50,70 @@ export const RecipeCard = (props) => {
 		setExpanded(!expanded);
 	};
 
+	useEffect(() => {
+		props.fetchData();
+	}, []);
+
 	return (
-		<Card className={classes.root}>
-			<CardHeader
-				avatar={
-					<Avatar aria-label="recipe" className={classes.avatar}>
-						R
-					</Avatar>
-				}
-				action={
-					<IconButton aria-label="settings">
-						<MoreVertIcon />
-					</IconButton>
-				}
-				title={props.strMeal}
-				subheader={new Date()}
-			/>
-			<CardMedia
-				className={classes.media}
-				image={props.strMealThumb}
-				title={props.strMeal}
-			/>
-			<CardContent>
-				<Typography variant="body2" color="textSecondary" component="p">
-					{props.strMeal}
-				</Typography>
-			</CardContent>
-			<CardActions disableSpacing>
-				<IconButton aria-label="add to favorites">
-					<FavoriteIcon />
-				</IconButton>
-				<IconButton aria-label="shares">
-					<ShareIcon />
-				</IconButton>
-				<IconButton
-					className={clsx(classes.expand, {
-						[classes.expandOpen]: expanded,
-					})}
-					onClick={handleExpand}
-					aria-expanded={expanded}
-					aria-label="show more"
-				>
-					<ExpandMoreIcon />
-				</IconButton>
-			</CardActions>
-			<Collapse in={expanded} timeout="auto" unmountOnExit>
+		<div>
+			{props.is_loading_data ? (
+				<div>**fetching recipe**</div>
+			) : props.error ? (
+				<div style={{ color: 'red' }}>{props.error}</div>
+			) : (
+				<></>
+			)}
+			<Card className={classes.root}>
+				<CardHeader
+					avatar={
+						<Avatar aria-label="recipe" className={classes.avatar}>
+							R
+						</Avatar>
+					}
+					action={
+						<IconButton aria-label="settings">
+							<MoreVertIcon />
+						</IconButton>
+					}
+					title={props.strMeal}
+					subheader={new Date()}
+				/>
+				<CardMedia
+					className={classes.media}
+					image={props.strMealThumb}
+					title={props.strMeal}
+				/>
 				<CardContent>
-					<Typography paragraph>Instructions:</Typography>
-					<Typography paragraph>{props.strInstructions}</Typography>
+					<Typography variant="body2" color="textSecondary" component="p">
+						{props.strMeal}
+					</Typography>
 				</CardContent>
-			</Collapse>
-		</Card>
+				<CardActions disableSpacing>
+					<IconButton aria-label="add to favorites">
+						<FavoriteIcon />
+					</IconButton>
+					<IconButton aria-label="shares">
+						<ShareIcon />
+					</IconButton>
+					<IconButton
+						className={clsx(classes.expand, {
+							[classes.expandOpen]: expanded,
+						})}
+						onClick={handleExpand}
+						aria-expanded={expanded}
+						aria-label="show more"
+					>
+						<ExpandMoreIcon />
+					</IconButton>
+				</CardActions>
+				<Collapse in={expanded} timeout="auto" unmountOnExit>
+					<CardContent>
+						<Typography paragraph>Instructions:</Typography>
+						<Typography paragraph>{props.strInstructions}</Typography>
+					</CardContent>
+				</Collapse>
+			</Card>
+		</div>
 	);
 };
 
@@ -110,6 +123,8 @@ const mapStateToProps = (state) => {
 		strMeal: state.strMeal,
 		strInstructions: state.strInstructions,
 		strMealThumb: state.strMealThumb,
+		is_loading_data: state.is_loading_data,
+		error: state.error,
 	};
 };
 
