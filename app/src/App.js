@@ -1,13 +1,17 @@
 import React from 'react';
-// import { fetchData } from './actions';
 import { RecipeCard } from './components/RecipeCard';
 
 import './App.css';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <RecipeCard />
+      <RecipeCard 
+      meals={props.meals}
+      strMeal={props.strMeal}
+      strMealThumb={props.strMealThumb}
+      strInstructions={props.strInstructions} 
+      />
     </div>
   );
 }

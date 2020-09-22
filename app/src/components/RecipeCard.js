@@ -50,8 +50,8 @@ export const RecipeCard = (props) => {
 		setExpanded(!expanded);
 	};
 
-	useEffect(() => {
-		props.fetchData();
+	useEffect((props) => {
+		fetchData();
 	}, []);
 
 	return (
@@ -76,7 +76,7 @@ export const RecipeCard = (props) => {
 						</IconButton>
 					}
 					title={props.strMeal}
-					subheader={new Date()}
+					// subheader={new Date()}
 				/>
 				<CardMedia
 					className={classes.media}
