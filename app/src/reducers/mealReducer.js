@@ -5,7 +5,11 @@ import {
 } from '../actions/actions';
 
 const initialState = {
-	meals: [],
+	meals: [{
+		strMeal: '',
+		strMealThumb: '',
+		strInstructions: ''
+	}],
 	is_loading_data: false,
 	error: '',
 };

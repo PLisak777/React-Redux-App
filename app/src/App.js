@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchData } from './actions/actions';
 import { RecipeCard } from './components/RecipeCard';
 
 import './App.css';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+		props.fetchData();
+	}, []);
+
   return (
     <div className="App">
       <RecipeCard 
@@ -12,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { fetchData })(App);

@@ -43,9 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const RecipeCard = (props) => {
-    useEffect(() => {
-		fetchData();
-	}, []);
+
 
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState(false);
@@ -120,8 +118,6 @@ export const RecipeCard = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		meals: state.meals,
-		strMeal: state.strMeal,
-		strInstructions: state.strInstructions,
 		strMealThumb: state.strMealThumb,
 		is_loading_data: state.is_loading_data,
 		error: state.error,
