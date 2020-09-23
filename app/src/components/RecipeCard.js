@@ -43,16 +43,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const RecipeCard = (props) => {
+    useEffect(() => {
+		fetchData();
+	}, []);
+
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState(false);
 
 	const handleExpand = () => {
 		setExpanded(!expanded);
 	};
-
-	useEffect((props) => {
-		fetchData();
-	}, []);
 
 	return (
 		<div>

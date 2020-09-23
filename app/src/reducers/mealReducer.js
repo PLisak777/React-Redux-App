@@ -5,11 +5,7 @@ import {
 } from '../actions/actions';
 
 const initialState = {
-	meals: [{
-		strMeal: '',
-		strMealThumb: '',
-		strInstructions: '',
-	}],
+	meals: [],
 	is_loading_data: false,
 	error: '',
 };
@@ -26,6 +22,9 @@ export const mealReducer = (state = initialState, action) => {
 				...state,
 				is_loading_data: false,
 				meals: action.payload,
+				// strMeal: action.payload,
+				// strMealThumb: action.payload,
+				// strInstructions: action.payload,
 				error: '',
 			};
 		case FETCH_DATA_FAIL:
