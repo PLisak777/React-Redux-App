@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../actions/actions';
 
@@ -44,9 +44,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const RecipeCard = (props) => {
 
+console.log('props from RecipeCard', props)
 
 	const classes = useStyles();
 	const [expanded, setExpanded] = useState(false);
+	
 
 	const handleExpand = () => {
 		setExpanded(!expanded);
@@ -73,12 +75,12 @@ export const RecipeCard = (props) => {
 							<MoreVertIcon />
 						</IconButton>
 					}
-					title={props.strMeal}
-					// subheader={new Date()}
+					title={props.store.strMeal}
 				/>
 				<CardMedia
 					className={classes.media}
-					image={props.strMealThumb}
+					component='img'
+					image={props.store.strMealThumb}
 					title={props.strMeal}
 				/>
 				<CardContent>
@@ -115,13 +117,4 @@ export const RecipeCard = (props) => {
 	);
 };
 
-const mapStateToProps = (state) => {
-	return {
-		meals: state.meals,
-		strMealThumb: state.strMealThumb,
-		is_loading_data: state.is_loading_data,
-		error: state.error,
-	};
-};
 
-export default connect(mapStateToProps, { fetchData })(RecipeCard);

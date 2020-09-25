@@ -12,6 +12,7 @@ export const fetchData = () => (dispatch) => {
 			.get('https://www.themealdb.com/api/json/v1/1/random.php?api_key=1')
 			.then((res) => {
 				console.log('pl: actions.js: fetchData: axios.then: res: ', res);
+				console.log('res.data.', res.data.meals[0])
 				dispatch({
 					type: FETCH_DATA_SUCCESS,
 					payload: res.data.meals[0]
